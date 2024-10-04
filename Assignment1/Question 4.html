@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Registration</title>
+    <script>
+        // Function to validate course registration form
+        function validateForm() {
+            // Get form elements
+            const studentID = document.getElementById("studentID").value;
+            const courseID = document.getElementById("courseID").value;
+            const prerequisites = document.getElementById("prerequisites").value;
+
+            // Check if student ID is not empty and is a number
+            if (studentID === "" || isNaN(studentID)) {
+                alert("Please enter a valid Student ID.");
+                return false;
+            }
+
+            // Check if course ID is selected
+            if (courseID === "") {
+                alert("Please select a course.");
+                return false;
+            }
+
+            // Check prerequisites (simple example)
+            if (prerequisites !== "" && prerequisites.split(',').some(p => !isCourseCompleted(p))) {
+                alert("You have not met the prerequisites for this course.");
+                return false;
+            }
+
+            // If all checks pass
+            return true;
+        }
+
+        // Simulated function to check if a course is completed
+        function isCourseCompleted(courseID) {
+            // For demonstration, assume course with ID 'C101' is completed
+            return courseID === 'C101';
+        }
+    </script>
+</head>
+<body>
+    <h2>Course Registration Form</h2>
+    <form onsubmit="return validateForm()">
+        <label for="studentID">Student ID:</label>
+        <input type="text" id="studentID" name="studentID"><br><br>
+
+        <label for="courseID">Course ID:</label>
+        <select id="courseID" name="courseID">
+            <option value="">Select a course</option>
+            <option value="CSE101">CSE101 - Introduction to Computer Science</option>
+            <option value="MATH201">MATH201 - Calculus II</option>
+            <!-- More courses -->
+        </select><br><br>
+
+        <label for="prerequisites">Prerequisites (comma-separated IDs):</label>
+        <input type="text" id="prerequisites" name="prerequisites" placeholder="e.g., CSE100, MATH101"><br><br>
+
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
